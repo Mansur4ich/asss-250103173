@@ -1,0 +1,3 @@
+package task4;
+
+public class CurrencyOrderAdapter implements PricingService {private final LegacyForeignOrder order;private final LegacyCurrencyConverter converter;private final String currency;public CurrencyOrderAdapter(LegacyForeignOrder o,LegacyCurrencyConverter c,String currency){order=o;converter=c;this.currency=currency;}public double calculateTotal(){return converter.convert(order.getGbpAmount(),"GBP",currency);}public String getReceiptBreakdown(){return String.format(java.util.Locale.US,"Order [%s] Base Item: $%.2f %s (Converted from %.2f GBP)",order.getOrderId(),calculateTotal(),currency,order.getGbpAmount());} }
