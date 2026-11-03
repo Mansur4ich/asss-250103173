@@ -1,0 +1,3 @@
+package task3;
+
+public abstract class Alert { protected final MessageChannel channel;protected final DispatchStrategy strategy;public Alert(MessageChannel c,DispatchStrategy s){if(c==null||s==null)throw new IllegalArgumentException();channel=c;strategy=s;}public void processAlert(String r,String raw,int hour){int severity=getSeverityLevel();if(strategy.shouldDispatch(severity,hour))channel.transmit(r,formatAlertBody(raw));else System.out.printf("[DISPATCH SUPPRESSED] Alert blocked by policy '%s' at hour %02d:00 (Severity: %d)%n",strategy.getStrategyName(),hour,severity);}public abstract int getSeverityLevel();public abstract String formatAlertBody(String raw); }
